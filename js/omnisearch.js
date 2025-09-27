@@ -80,9 +80,10 @@ class Omnisearch {
 
 		this._init_initScrollHandler();
 
-		$(document.body).on("keypress", (evt) => {
+		// Bind find hotkey (F) on keydown for consistent behaviour across browsers
+		$(document.body).on("keydown", (evt) => {
 			if (!EventUtil.noModifierKeys(evt) || EventUtil.isInInput(evt)) return;
-			if (EventUtil.getKeyIgnoreCapsLock(evt) !== "F") return;
+			if (EventUtil.getKeyIgnoreCapsLock(evt) !== "f") return;
 			evt.preventDefault();
 			this._$iptSearch.select().focus();
 		});

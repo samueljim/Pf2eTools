@@ -19,13 +19,15 @@ const ListUtil = {
 		if (listOpts.isBindFindHotkey && !ListUtil._isFindHotkeyBound) {
 			helpText.push(`Hotkey: f.`);
 
-			$(document.body).on("keypress", (evt) => {
+			$(document.body).on("keydown", (evt) => {
 				if (!EventUtil.noModifierKeys(evt) || EventUtil.isInInput(evt)) return;
 				if (EventUtil.getKeyIgnoreCapsLock(evt) === "f") {
 					evt.preventDefault();
 					$iptSearch.select().focus();
 				}
 			});
+			// mark as bound so we don't bind multiple times
+			ListUtil._isFindHotkeyBound = true;
 		}
 
 		if (listOpts.syntax) {
@@ -86,7 +88,7 @@ const ListUtil = {
 	},
 
 	_initList_bindWindowHandlers () {
-		window.addEventListener("keypress", (evt) => {
+		window.addEventListener("keydown", (evt) => {
 			if (!EventUtil.noModifierKeys(evt)) return;
 
 			// K up; J down
@@ -94,6 +96,7 @@ const ListUtil = {
 			if (key === "k" || key === "j") {
 				// don't switch if the user is typing somewhere else
 				if (EventUtil.isInInput(evt)) return;
+				console.debug("ListUtil keydown", {key, hash: window.location.hash, selected: Hist.getSelectedListItem() ? Hist.getSelectedListItem().values.hash : null});
 				ListUtil._initList_handleListUpDownPress(key === "k" ? -1 : 1);
 			} else if (ListUtil._isPreviewable && key === "m") {
 				if (EventUtil.isInInput(evt)) return;
@@ -106,10 +109,12 @@ const ListUtil = {
 	_initList_handleListUpDownPress (dir) {
 		const it = Hist.getSelectedListElementWithLocation();
 		if (!it) return;
+		console.debug("_initList_handleListUpDownPress start", {selectedListIndex: it.x, selectedItemIndex: it.y, visibleItemCount: it.list.visibleItems.length});
 
 		const lists = ListUtil.getPrimaryLists();
 
 		const ixVisible = it.list.visibleItems.indexOf(it.item);
+		console.debug("_initList_handleListUpDownPress", {ixVisible});
 		if (!~ixVisible) {
 			// If the currently-selected item is not visible, jump to the top/bottom of the list
 			const listsWithVisibleItems = lists.filter(list => list.visibleItems.length);
@@ -123,12 +128,13 @@ const ListUtil = {
 			return;
 		}
 
-		const tgtItemSameList = it.list.visibleItems[ixVisible + dir];
-		if (tgtItemSameList) {
-			window.location.hash = tgtItemSameList.values.hash;
-			ListUtil._initList_scrollToItem();
-			return;
-		}
+			const tgtItemSameList = it.list.visibleItems[ixVisible + dir];
+			console.debug({tgtItemSameList});
+			if (tgtItemSameList) {
+				window.location.hash = tgtItemSameList.values.hash;
+				ListUtil._initList_scrollToItem();
+				return;
+			}
 
 		let tgtItemOtherList = null;
 		for (let i = it.x + dir; i >= 0 && i < lists.length; i += dir) {

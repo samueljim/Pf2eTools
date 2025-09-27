@@ -31,8 +31,8 @@ window.addEventListener("load", () => {
 		});
 
 	const $body = $(`body`);
-	$body.on("keypress", (e) => {
-		if (((e.key === "f") && EventUtil.noModifierKeys(e))) {
+	$body.on("keydown", (e) => {
+		if (((EventUtil.getKeyIgnoreCapsLock(e) === "f") && EventUtil.noModifierKeys(e))) {
 			if (EventUtil.isInInput(e)) return;
 			e.preventDefault();
 

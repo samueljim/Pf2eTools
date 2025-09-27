@@ -598,6 +598,17 @@
 			]
 		},
 		{
+			"name": "Fendry",
+			"source": "WOODS",
+			"type": "Common",
+			"typicalSpeakers": [
+				"{@place Ataana|WOODS|Ataana Natives}"
+			],
+			"entries": [
+				"Fendry is a language spoken by the Oread Natives of the Ataana region."
+			]
+		},
+		{
 			"name": "Cyclops",
 			"source": "B1",
 			"page": 348,

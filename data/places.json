@@ -90,6 +90,55 @@
 				}
 			]
 		},
+
+		{
+			"name": "Ataana",
+			"level": 1,
+			"category": "Nation",
+			"source": "WOODS",
+			"traits": [
+				"ng"
+			],
+			"description": "Woods are nearby",
+			"nationData": {
+				"government": "Unknown",
+				"capital": {
+					"name": "Unknown",
+					"total": 0
+				},
+				"population": [
+					"Unknown"
+				],
+				"languages": [
+					"{@language Common|PC1}",
+					"{@language Fendry|WOODS}"
+				],
+				"religions": [
+					"Unknown"
+				],
+				"exports": [
+					"lumber",
+					"Unknown"
+				],
+				"enemies": [
+					"Unknown"
+				],
+				"factions": [
+					"Unknown"
+				],
+				"threats": [
+					"the woods"
+				]
+			},
+			"residents": [
+				{
+					"name": "Unknown",
+					"descriptor": "Unknown",
+					"gender": "Unknown",
+					"ancestry": "Unknown"
+				}
+			]
+		},
 		{
 			"name": "Iadara",
 			"level": 14,

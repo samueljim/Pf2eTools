@@ -2375,14 +2375,27 @@ DataUtil = {
 			request.open("GET", url, true);
 			request.overrideMimeType("application/json");
 			request.onload = function () {
-				try {
-					DataUtil._loaded[url] = JSON.parse(this.response);
+				// If the server returns a non-2xx status, treat the resource as missing rather than throwing
+				if (this.status >= 200 && this.status < 300) {
+					try {
+						DataUtil._loaded[url] = JSON.parse(this.response);
+						resolve();
+					} catch (e) {
+						// Parsing failed; resolve as null so callers can handle missing/invalid JSON gracefully
+						DataUtil._loaded[url] = null;
+						resolve();
+					}
+				} else {
+					// Non-success status (e.g., 404) - mark as not loaded and resolve
+					DataUtil._loaded[url] = null;
 					resolve();
-				} catch (e) {
-					reject(new Error(`Could not parse JSON from ${url}: ${e.message}`));
 				}
 			};
-			request.onerror = (e) => reject(new Error(`Error during JSON request: ${e.target.status}`));
+			request.onerror = (e) => {
+				// Network error - resolve as null so it doesn't throw globally
+				DataUtil._loaded[url] = null;
+				resolve();
+			};
 			request.send();
 		});
 
@@ -2398,9 +2411,8 @@ DataUtil = {
 		try {
 			data = await DataUtil._pLoad(procUrl);
 		} catch (e) {
-			setTimeout(() => {
-				throw e;
-			})
+			// If the request promise rejected for some reason, treat as missing
+			data = null;
 		}
 
 		// Fallback to the un-processed URL
@@ -2408,6 +2420,8 @@ DataUtil = {
 			ident = url;
 			data = await DataUtil._pLoad(url);
 		}
+		// If still no data, return null to allow callers to handle missing JSON gracefully
+		if (!data) return null;
 
 		await DataUtil.pDoMetaMerge(ident, data);
 

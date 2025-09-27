@@ -668,12 +668,13 @@ const BookUtil = {
 		});
 
 		$(document.body)
-			.off("keypress")
-			.on("keypress", (e) => {
-				if (!((e.key === "f" || e.key === "g") && EventUtil.noModifierKeys(e))) return;
-				if (EventUtil.isInInput(e)) return;
+			.off("keydown")
+			.on("keydown", (e) => {
+				if (!EventUtil.noModifierKeys(e) || EventUtil.isInInput(e)) return;
+				const k = EventUtil.getKeyIgnoreCapsLock(e);
+				if (k !== "f" && k !== "g") return;
 				e.preventDefault();
-				BookUtil._showSearchBox(indexData, bookId, e.key === "g");
+				BookUtil._showSearchBox(indexData, bookId, k === "g");
 			});
 
 		// region Mobile only "open find bar" buttons
