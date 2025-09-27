@@ -689,6 +689,20 @@ class AncestriesPage extends BaseComponent {
 			await this._pDoSynchronizedRender();
 		});
 
+		// Ensure that when the active ancestry changes, we always show the Details tab
+		this._addHook("ancestryId", "_", () => {
+			const $wrp = $(`#ancestrystats-wrp`);
+			const $tabs = $wrp.find(`#ancestrystats-top-tabs`);
+			if ($tabs.length) {
+				// Ensure Details visually active
+				$tabs.find(`#ancestry-tab-details`).addClass("btn-danger");
+				$tabs.find(`#ancestry-tab-images`).removeClass("btn-danger");
+				// Hide images container and show details container
+				$wrp.find(`#ancestries-images`).hide();
+				$wrp.find(`#ancestrystats`).closest('.wrp-stats-table').show();
+			}
+		});
+
 		this._addHookAll("featId", async () => {
 			await this._pDoSynchronizedRender(true);
 		});
@@ -892,6 +906,67 @@ class AncestriesPage extends BaseComponent {
 	_render_renderAncestry () {
 		const $ancestryStats = $(`#ancestrystats`).empty();
 		const anc = this.activeAncestry;
+
+		// Ensure top tabs (Details / Images) exist on the wrapper
+		const $wrp = $(`#ancestrystats-wrp`);
+		$wrp.find(`#ancestrystats-top-tabs`).remove();
+		$wrp.find(`#ancestries-images`).remove();
+
+		const {veHerUrls, ancUrls} = this._getImageUrls();
+		const imageUrls = [...ancUrls, ...veHerUrls];
+
+		const $tabs = $(
+			`<div id="ancestrystats-top-tabs" class="wrp-stat-tab mb-2" style="display:flex;align-items:center;gap:0.5rem">
+				<div id="ancestrystats-tabs" class="btn-group">
+					<button type="button" class="btn btn-xs btn-default" id="ancestry-tab-details">Details</button>
+					<button type="button" class="btn btn-xs btn-default" id="ancestry-tab-images" ${!imageUrls.length? 'disabled' : ''}>Images</button>
+				</div>
+			</div>`
+		).prependTo($wrp);
+
+		const $imagesContainer = $(`<div id="ancestries-images" class="wrp-stats-table" style="display:none"></div>`);
+		$tabs.after($imagesContainer);
+
+		const renderImages = () => {
+			$imagesContainer.empty();
+			if (!imageUrls.length) {
+				$imagesContainer.append(`<div class="initial-message">No images available for this ancestry.</div>`);
+				return;
+			}
+			const imgs = imageUrls.map(u => `<figure style="margin:0 0 1rem 0;max-width:48%;flex:1 1 300px"><img src="${u}" loading="lazy" style="width:100%;height:auto;border:1px solid #ddd;border-radius:4px"><figcaption style="font-size:0.85rem;margin-top:0.25rem;word-break:break-all"><a href="${u}" target="_blank" rel="noopener noreferrer">Open image</a></figcaption></figure>`).join("");
+			$imagesContainer.append(`<div class="img-grid" style="display:flex;flex-wrap:wrap;gap:1rem">${imgs}</div>`);
+		};
+
+		renderImages();
+
+		// Tab handlers
+		$tabs.find(`#ancestry-tab-details`).on("click", () => {
+			$imagesContainer.hide();
+			$tabs.find(`#ancestry-tab-details`).addClass("btn-danger");
+			$tabs.find(`#ancestry-tab-images`).removeClass("btn-danger");
+			$ancestryStats.closest('.wrp-stats-table').show();
+			$wrp.data('activeView', 'details');
+		});
+		$tabs.find(`#ancestry-tab-images`).on("click", () => {
+			$ancestryStats.closest('.wrp-stats-table').hide();
+			$imagesContainer.show();
+			$tabs.find(`#ancestry-tab-images`).addClass("btn-danger");
+			$tabs.find(`#ancestry-tab-details`).removeClass("btn-danger");
+			$wrp.data('activeView', 'images');
+		});
+
+		// Restore previous selection or default to Details
+		const prev = $wrp.data('activeView') || 'details';
+		if (prev === 'images') {
+			$tabs.find(`#ancestry-tab-images`).addClass("btn-danger");
+			$tabs.find(`#ancestry-tab-details`).removeClass("btn-danger");
+			$imagesContainer.show();
+			$ancestryStats.closest('.wrp-stats-table').hide();
+		} else {
+			$tabs.find(`#ancestry-tab-details`).addClass("btn-danger");
+			$tabs.find(`#ancestry-tab-images`).removeClass("btn-danger");
+			$imagesContainer.hide();
+		}
 
 		const renderer = Renderer.get().resetHeaderIndex().setFirstSection(false);
 

@@ -657,6 +657,18 @@ class ClassesPage extends BaseComponent {
 			await this._pDoSynchronizedRender();
 		});
 
+		// Ensure that when the active class changes, we always show the Details tab
+		this._addHook("classId", "_", () => {
+			const $wrp = $(`#classesstats-wrp`);
+			const $tabs = $wrp.find(`#classesstats-top-tabs`);
+			if ($tabs.length) {
+				$tabs.find(`#classes-tab-details`).addClass("btn-danger");
+				$tabs.find(`#classes-tab-images`).removeClass("btn-danger");
+				$wrp.find(`#classes-images`).hide();
+				$wrp.find(`#classesstats`).closest('.wrp-stats-table').show();
+			}
+		});
+
 		this._addHookAll("featId", async () => {
 			await this._pDoSynchronizedRender(true);
 		});
@@ -854,6 +866,68 @@ class ClassesPage extends BaseComponent {
 		const $classStats = $(`#classesstats`).empty();
 		const cls = this.activeClass;
 
+		// Ensure top tabs (Details / Images) exist on the wrapper
+		const $wrp = $(`#classesstats-wrp`);
+		// Remove any previous tabs we injected
+		$wrp.find(`#classesstats-top-tabs`).remove();
+		$wrp.find(`#classes-images`).remove();
+
+		const imageUrls = (cls.summary || {}).images || [];
+		const $tabs = $(`
+			<div id="classesstats-top-tabs" class="wrp-stat-tab mb-2" style="display:flex;align-items:center;gap:0.5rem">
+				<div id="classesstats-tabs" class="btn-group">
+					<button type="button" class="btn btn-xs btn-default" id="classes-tab-details">Details</button>
+					<button type="button" class="btn btn-xs btn-default" id="classes-tab-images" ${!imageUrls.length? 'disabled' : ''}>Images</button>
+				</div>
+			</div>
+		`).prependTo($wrp);
+
+		// Insert the images container directly after the tabs so tabs remain at top
+		const $imagesContainer = $(`<div id="classes-images" class="wrp-stats-table" style="display:none"></div>`);
+		$tabs.after($imagesContainer);
+
+		// Populate images container (will be re-rendered each time)
+		const renderImages = () => {
+			$imagesContainer.empty();
+			if (!imageUrls.length) {
+				$imagesContainer.append(`<div class="initial-message">No images available for this class.</div>`);
+				return;
+			}
+			const imgs = imageUrls.map(u => `<figure style="margin:0 0 1rem 0;max-width:48%;flex:1 1 300px"><img src="${u}" loading="lazy" style="width:100%;height:auto;border:1px solid #ddd;border-radius:4px"><figcaption style="font-size:0.85rem;margin-top:0.25rem;word-break:break-all"><a href="${u}" target="_blank" rel="noopener noreferrer">Open image</a></figcaption></figure>`).join("");
+			$imagesContainer.append(`<div class="img-grid" style="display:flex;flex-wrap:wrap;gap:1rem">${imgs}</div>`);
+		};
+
+		renderImages();
+
+		// Tab handlers
+		$tabs.find(`#classes-tab-details`).on("click", () => {
+			$imagesContainer.hide();
+			$tabs.find(`#classes-tab-details`).addClass("btn-danger");
+			$tabs.find(`#classes-tab-images`).removeClass("btn-danger");
+			$classStats.closest('.wrp-stats-table').show();
+			$wrp.data('activeView', 'details');
+		});
+		$tabs.find(`#classes-tab-images`).on("click", () => {
+			$classStats.closest('.wrp-stats-table').hide();
+			$imagesContainer.show();
+			$tabs.find(`#classes-tab-images`).addClass("btn-danger");
+			$tabs.find(`#classes-tab-details`).removeClass("btn-danger");
+			$wrp.data('activeView', 'images');
+		});
+
+		// Restore previous selection or default to Details
+		const prev = $wrp.data('activeView') || 'details';
+		if (prev === 'images') {
+			$tabs.find(`#classes-tab-images`).addClass("btn-danger");
+			$tabs.find(`#classes-tab-details`).removeClass("btn-danger");
+			$imagesContainer.show();
+			$classStats.closest('.wrp-stats-table').hide();
+		} else {
+			$tabs.find(`#classes-tab-details`).addClass("btn-danger");
+			$tabs.find(`#classes-tab-images`).removeClass("btn-danger");
+			$imagesContainer.hide();
+		}
+
 		const renderer = Renderer.get().resetHeaderIndex();
 
 		const statSidebarEntries = Parser.getClassSideBarEntries(cls);
@@ -931,6 +1005,9 @@ class ClassesPage extends BaseComponent {
 		this._$divNoContent = ClassesPage._render_$getNoContent().appendTo($classStats);
 
 		$classStats.show()
+
+		// Make sure the details wrapper is visible when rendering a class
+		$classStats.closest('.wrp-stats-table').show();
 	}
 
 	_render_renderClassAdvancementTable () {
@@ -1105,13 +1182,16 @@ class ClassesPage extends BaseComponent {
 			inactiveText: "Show Feats",
 		}).title("Toggle Feat View").addClass("mb-1");
 
-		const imageLinks = ((this.activeClass.summary || {}).images || []).map(l => `<a href="${l}" target="_blank" rel="noopener noreferrer">${l}</a>`);
+		const imageUrls = (this.activeClass.summary || {}).images || [];
+		const imageLinks = imageUrls.map(l => `<a href="${l}" target="_blank" rel="noopener noreferrer">${l}</a>`);
+
 		const $dropDownImages = $(`<li class="dropdown" style="list-style: none"></li>`);
 		const $dropDownImagesButton = $(`<button class="btn btn-default btn-xs mr-2 mb-1 flex-3">Images</button>`).on("click", (evt) => {
 			evt.preventDefault();
 			evt.stopPropagation();
 			if (evt.ctrlKey || evt.shiftKey) {
-				imageLinks.forEach(link => $(link)[0].click());
+				// open each link in a new tab
+				imageUrls.forEach(u => window.open(u, "_blank", "noopener"));
 			} else {
 				$dropDownImagesButton.toggleClass("ui-tab__btn-tab-head");
 				$dropDownImages.toggleClass("open");
@@ -1122,6 +1202,37 @@ class ClassesPage extends BaseComponent {
 		document.addEventListener("click", () => {
 			$dropDownImages.toggleClass("open", false);
 			$dropDownImagesButton.toggleClass("ui-tab__btn-tab-head", false);
+		});
+
+		// Button to open a new tab and render all images inline
+		const $btnViewImages = $(`<button class="btn btn-default btn-xs mr-2 mb-1 flex-3">View Images</button>`).on("click", (evt) => {
+			evt.preventDefault();
+			evt.stopPropagation();
+			const urls = imageUrls;
+			if (!urls || !urls.length) return;
+
+			const win = window.open('about:blank', '_blank');
+			if (!win) return; // popup blocked
+
+			const html = `<!doctype html><html><head><meta charset="utf-8"><title>${this.activeClass.name} - Images</title>
+				<meta name="viewport" content="width=device-width,initial-scale=1" />
+				<style>body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:1rem;background:#fff;color:#111} .img-grid{display:flex;flex-wrap:wrap;gap:1rem} .img-grid figure{margin:0;flex:1 1 300px;max-width:calc(50% - 1rem);box-sizing:border-box} .img-grid img{width:100%;height:auto;display:block;border:1px solid #ddd;border-radius:4px} figcaption{font-size:0.85rem;margin-top:0.25rem;word-break:break-all}
+				header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+				a.button{background:#2b74d6;color:#fff;padding:0.4rem 0.6rem;border-radius:4px;text-decoration:none}
+				@media (max-width:700px){ .img-grid figure{max-width:100%} }
+				</style></head><body>
+				<header><h1 style="font-size:1.1rem;margin:0">${this.activeClass.name} — Images</h1><div><a class="button" href="${window.location.href}" target="_blank" rel="noopener">Open source page</a></div></header>
+				<div class="img-grid">${urls.map(u => `<figure><img src="${u}" loading="lazy" alt="${this.activeClass.name}"><figcaption><a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a></figcaption></figure>`).join("")}</div>
+				</body></html>`;
+
+			try {
+				win.document.open();
+				win.document.write(html);
+				win.document.close();
+			} catch (e) {
+				// fallback: navigate to first image if writing is blocked
+				win.location.href = urls[0];
+			}
 		});
 
 		$$`<div class="flex-v-center m-1 flex-wrap">

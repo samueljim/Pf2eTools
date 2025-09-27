@@ -864,6 +864,14 @@
 			]
 		},
 		{
+			"name": "Spanish",
+			"source": "WOODS",
+			"type": "Regional",
+			"entries": [
+				"Spanish (español), also called Castilian (castellano), is a Romance language that originated on the Iberian Peninsula and evolved from Vulgar Latin. It is a global language with around 500 million native speakers, making it the second-most spoken native language in the world after Mandarin Chinese. Spanish is the official language of 20 countries, primarily in the Americas and Spain, and is also one of the six official languages of the United Nations. "
+			]
+		},
+		{
 			"name": "Kelish",
 			"source": "CRB",
 			"page": 432,
