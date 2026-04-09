@@ -1,6 +1,685 @@
 {
 	"hazard": [
 		{
+			"name": "The Eclipse",
+			"source": "SF3",
+			"page": 22,
+			"level": 19,
+			"traits": [
+				"unique",
+				"complex",
+				"environmental"
+			],
+			"stealth": {
+				"bonus": 0,
+				"minProf": "trained"
+			},
+			"description": [
+				"The Eclipse is located high in the sky, manifesting as an eclipsed sun."
+			],
+			"disable": {
+				"entries": [
+					"reduce the Eclipse to 0 HP, or {@spell dispel magic} (10th level; counteract DC 39) to counteract the Eclipse (once it's in range)"
+				]
+			},
+			"defenses": {
+				"ac": {
+					"std": 46
+				},
+				"savingThrows": {
+					"fort": {
+						"std": 32
+					},
+					"ref": {
+						"std": 38
+					}
+				},
+				"hardness": {
+					"std": 32
+				},
+				"hp": {
+					"std": 124
+				},
+				"bt": {
+					"std": 62
+				},
+				"immunities": [
+					"critical hits",
+					"object immunities",
+					"precision damage"
+				]
+			},
+			"actions": [
+				{
+					"name": "Herald the End",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"trigger": "The PCs arrive at the island",
+					"entries": [
+						"A fiery point of light appears in the sky at the center of the Eclipse, swiftly growing in size as it becomes apparent that a meteor is hurtling toward the island. The Eclipse rolls initiative."
+					]
+				}
+			],
+			"routine": [
+				"(1 action) The Eclipse heals 50 points of damage, retreats upward from PCs if any have approached (as determined by its Distance Score), then unleashes a meteor down on the island below. The meteor explodes upon striking the island, creating a 30-foot radius burst that inflicts {@damage 8d6} fire and {@damage 4d6} bludgeoning damage (DC 41 basic Reflex save) to all creatures caught in the blast. The eclipse targets these strikes to catch as many PCs in the blast as it can each time\u2014while it doesn't seek to damage a {@creature bul-gae|FRP3}, it won't worry about catching one or both in the area of effect if that spot is the most advantageous to striking the most possible PCs."
+			]
+		},
+		{
+			"name": "The Avalanche",
+			"source": "SF3",
+			"page": 11,
+			"level": 19,
+			"traits": [
+				"unique",
+				"complex",
+				"environmental"
+			],
+			"stealth": {
+				"bonus": 37,
+				"minProf": "master"
+			},
+			"description": [
+				"{@item The Avalanche|SF3} rests as a gem on a stone pedestal, continually unleashing natural disasters in the nearby area."
+			],
+			"disable": {
+				"entries": [
+					"Two DC 41 {@skill Athletics} or DC 43 {@skill Survival} checks to approach the pedestal, resisting the quaking earth and other hazards and eventually holding strong enough to take the gem from the pedestal; a creature who can approach the pedestal without touching the ground, such as by jumping or flying, can simply snatch the gem and end the Avalanche's assault"
+				]
+			},
+			"actions": [
+				{
+					"name": "Shuddering Boom",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"traits": [
+						"earth",
+						"evocation",
+						"incapacitation"
+					],
+					"trigger": "The PCs reach the area depicted on the Trial of the Avalanche map",
+					"entries": [
+						"The Avalanche shudders, causing a thunderous boom to fill the area. All creatures without the {@trait Earth} trait in the area must succeed at a DC 39 Fortitude save or become {@condition stunned||stunned 1} ({@condition stunned||stunned 3} on a critical failure). The Avalanche then rolls initiative."
+					]
+				}
+			],
+			"routine": [
+				"(1 action) The Avalanche releases its fury at a point within 120 feet, affecting all creatures within its area. Each creature must attempt a DC 41 Reflex save to hold their ground or avoid the incoming danger. The amount and type of damage dealt are based on the nature of the natural disaster the Avalanche unleashes, and certain types of disasters impose additional effects. The Avalanche can't unleash the same type of disaster twice in a row. The {@creature sturzstromer|B3} is immune to these effects.",
+				"{@b Earthquake} The ground in a 20-foot burst violently shakes and launches rubble in the area, dealing {@damage 3d12+20} bludgeoning damage. On a failure, the creature also stumbles back 5 feet, away from the Avalanche. On a critical failure, the creature stumbles back 10 feet and is knocked {@condition prone}.",
+				"{@b Fire Rain} A hail of burning rock rains down in a 20-foot-burst, dealing {@damage 3d12+20} fire damage. Creatures that fail their save catch on fire and take {@damage 2d6} {@condition persistent damage||persistent fire damage} (double on a critical failure).",
+				"{@b Landslide} A mass of rubble falls in a 10-foot-burst, dealing {@damage 9d8} bludgeoning damage. Creatures that critically fail their save become trapped under this rubble as if it were an avalanche (Core Rulebook 518), except a creature can attempt to {@action Escape} from beneath the rubble (DC 40).",
+				"{@b Lava Channel} A burst of molten rock violently spews forth in a 30-foot-long and 10-foot-wide line, dealing {@damage 9d8} fire damage. Creatures that fail their Reflex save are swept 15 feet away by the lava (30 feet on a critical failure). The lava cools almost instantly, allowing creatures to walk over its path immediately after resolving the effects of the disaster.",
+				"{@b Powerful Winds} A massive burst of wind travels in a 60-foot line, kicking up dust and dealing {@damage 3d12+20} slashing damage. Creatures that fail their Reflex save become {@condition dazzled} for 1 round and also fall {@condition prone} on a critical failure.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": [
+							"The creature takes no damage."
+						],
+						"Success": [
+							"The creature takes half damage."
+						],
+						"Failure": [
+							"The creature takes full damage."
+						],
+						"Critical Failure": [
+							"The creature takes double damage."
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Maggot Pit",
+			"source": "SF2",
+			"page": 65,
+			"level": 18,
+			"traits": [
+				"unique",
+				"complex",
+				"environmental"
+			],
+			"stealth": {
+				"bonus": 0,
+				"notes": "(the maggots are slow and impossible to miss)"
+			},
+			"description": [
+				"Countless human-faced, fanged maggots wriggle and squirm in this chamber."
+			],
+			"disable": {
+				"entries": [
+					"Three DC 45 {@skill Religion} checks within the room to utter prayers, which calm and quell the maggots with invocations to the gods"
+				]
+			},
+			"defenses": {
+				"ac": {
+					"std": 39
+				},
+				"savingThrows": {
+					"fort": {
+						"std": 27
+					},
+					"ref": {
+						"std": 33
+					}
+				},
+				"hp": {
+					"std": 120
+				},
+				"bt": {
+					"std": 60
+				},
+				"immunities": [
+					"precision damage"
+				],
+				"weaknesses": [
+					{
+						"name": "area damage",
+						"amount": 15
+					},
+					{
+						"name": "good damage",
+						"amount": 15
+					},
+					{
+						"name": "splash damage",
+						"amount": 15
+					}
+				],
+				"resistances": [
+					{
+						"name": "bludgeoning",
+						"amount": 10
+					},
+					{
+						"name": "piercing",
+						"amount": 20
+					},
+					{
+						"name": "slashing",
+						"amount": 20
+					}
+				]
+			},
+			"actions": [
+				{
+					"name": "Damning Swarm",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"traits": [
+						"death",
+						"divine",
+						"necromancy"
+					],
+					"trigger": "a creature appears in area {@b M1}",
+					"entries": [
+						"The swarming maggots squirm into a biting frenzy, and all creatures on the ground in area {@b M1} must attempt a DC 40 Fortitude save. The hazard then rolls initiative.",
+						{
+							"type": "successDegree",
+							"entries": {
+								"Critical Success": [
+									"The creature is unaffected."
+								],
+								"Success": [
+									"The creature takes {@damage 1d10+5} piercing damage, {@damage 3d6} poison damage, and is {@condition sickened||sickened 1}."
+								],
+								"Failure": [
+									"The creature takes {@damage 2d10+10} piercing damage, {@damage 6d6} poison damage, is {@condition sickened||sickened 1}, and is {@condition enfeebled||enfeebled 1} by the maggots' bites."
+								],
+								"Critical Failure": [
+									"The creature takes {@damage 4d10+20} piercing damage, {@damage 12d6} poison damage, is {@condition sickened||sickened 1}, and is {@condition enfeebled||enfeebled 2} by the maggots' bites."
+								]
+							}
+						}
+					]
+				}
+			],
+			"routine": [
+				"(2 actions; {@trait death}, {@trait divine}, {@trait necromancy}) On its initiative, the pit uses its first action to use Damning Swarm against any creature within 5 feet of the pit floor. It then takes its second action to form a long, thrashing tendril composed of thousands of maggots to lash at a single target within area M1."
+			],
+			"attacks": [
+				{
+					"range": "Melee",
+					"traits": [
+						"reach 200 feet"
+					],
+					"name": "maggot tendril",
+					"attack": 35,
+					"damage": "{@damage 1d12+20} piercing and {@damage 2d12} poison (on a critical hit, the target is {@condition enfeebled||enfeebled 1}; this has the {@trait poison} trait)"
+				}
+			],
+			"reset": [
+				"The pit functions continuously. If it's disabled or destroyed, it resets automatically after 24 hours if the crystal stele in area {@b M2} still functions, otherwise it doesn't reset."
+			]
+		},
+		{
+			"name": "Smith's Skull",
+			"source": "SF2",
+			"page": 54,
+			"level": 18,
+			"traits": [
+				"unique",
+				"haunt"
+			],
+			"stealth": {
+				"dc": 42,
+				"minProf": "master",
+				"notes": "to see the skull's lower jaws start to open"
+			},
+			"description": [
+				"The smith's skull gazes with fiery light and breathes in a deep breath."
+			],
+			"disable": {
+				"entries": [
+					"DC 48 {@skill Athletics} (master) to hold the skull's jaw shut, or DC 45 Occult or {@skill Religion} (expert) to quiet the Smith's spirit"
+				]
+			},
+			"actions": [
+				{
+					"name": "Smith's Inhalation",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"traits": [
+						"divine",
+						"enchantment",
+						"incapacitation",
+						"mental",
+						"visual"
+					],
+					"trigger": "A creature who can see the Smith's skull approaches within 20 feet",
+					"entries": [
+						"The skull's eyes flare. Each non-storykin creature within 60 feet who can see the skull is subjected to an overwhelming feeling of being sucked into it, and must attempt a DC 40 Will save.",
+						{
+							"type": "successDegree",
+							"entries": {
+								"Critical Success": [
+									"The creature is unaffected."
+								],
+								"Success": [
+									"The creature feels pain across its body, as if the skull's inhalation were pulling the skin from its bones. The creature becomes {@condition sickened||sickened 1} and takes {@damage 8d6} mental damage."
+								],
+								"Failure": [
+									"The creature is convinced that the skull just \"breathed in\" its skin, and it takes {@damage 16d6} mental damage. The overwhelming pain leaves the creature {@condition slowed||slowed 1} for 1 round as well."
+								],
+								"Critical Failure": [
+									"As failure, but {@damage 24d6} mental damage and the creature is {@condition stunned||stunned 3} from the pain."
+								]
+							}
+						}
+					]
+				}
+			],
+			"reset": [
+				"1 hour"
+			]
+		},
+		{
+			"name": "Cluster Heart",
+			"source": "SF2",
+			"page": 45,
+			"level": 18,
+			"traits": [
+				"environmental"
+			],
+			"stealth": {
+				"dc": 45,
+				"minProf": "master",
+				"notes": "to hear or feel the energy coalescing"
+			},
+			"description": [
+				"A wave of magic passes through the area, causing crystal shards to grow and stab intruders."
+			],
+			"disable": {
+				"entries": [
+					"DC 45 {@skill Nature} (master) to chip away at the crystal and disrupt its resonance, or DC 42 {@skill Thievery} (master) to carefully detach the crystals and then safely smash them"
+				]
+			},
+			"defenses": {
+				"ac": {
+					"std": 39
+				},
+				"savingThrows": {
+					"fort": {
+						"std": 33
+					},
+					"ref": {
+						"std": 27
+					}
+				},
+				"hardness": {
+					"std": 15
+				},
+				"hp": {
+					"std": 300
+				},
+				"bt": {
+					"std": 150
+				},
+				"immunities": [
+					"critical hits",
+					"object immunities",
+					"precision damage"
+				],
+				"resistances": [
+					{
+						"name": "{@spell disintegrate} deals double damage, ignoring Hardness, rather than destroying the cluster heart outright"
+					}
+				],
+				"weaknesses": [
+					{
+						"name": "sonic",
+						"amount": 20
+					}
+				]
+			},
+			"actions": [
+				{
+					"name": "Crystal Surge",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"traits": [
+						"force"
+					],
+					"trigger": "A non-elemental creature ends its turn adjacent to the cluster heart",
+					"entries": [
+						"The heart extends shards of crystal imbued with force, like a jabbing blade, and deals {@damage 3d10+20} force damage and {@damage 3d10+20} piercing damage to all creatures in a 20-foot radius (DC 40 basic Reflex save). A creature who takes piercing damage from the surge is exposed to crystal corruption (see {@creature crystalline sentinel|SF2}, but DC 40). On a critical failure, a creature also takes {@damage 2d6} {@condition persistent damage||persistent bleed damage}."
+					]
+				}
+			],
+			"reset": [
+				"Once the cluster heart uses its reaction, it automatically resets after 1 minute. As long as the cluster heart has 150 or more Hit Points, it recovers 50 per day."
+			]
+		},
+		{
+			"name": "Shadow Maze",
+			"source": "SF2",
+			"page": 35,
+			"level": 16,
+			"traits": [
+				"unique",
+				"complex",
+				"magical",
+				"trap"
+			],
+			"stealth": {
+				"bonus": 32,
+				"minProf": "master",
+				"notes": "to realize the water within the dome poses a supernatural threat"
+			},
+			"description": [
+				"Shifting illusions disorient, entrap, and agonize those who attempt to pass through the shadowy maze."
+			],
+			"disable": {
+				"entries": [
+					"DC 42 {@skill Thievery} (master) to decouple faint strands of shadow essence from the magical matrix that holds the maze together, DC 45 {@skill Arcana} or {@skill Occultism} to shunt the shadowy energy back into the Shadow Plane and render the maze inert, or {@spell dispel magic} (8th level; counteract DC 35) to counteract the shadow maze"
+				]
+			},
+			"actions": [
+				{
+					"name": "Disorient",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"traits": [
+						"illusion",
+						"incapacitation",
+						"mental"
+					],
+					"trigger": "A creature enters the 20-foot-wide interior of the shadow maze, either from area {@b C2} or {@b C4}, or through a hole smashed in the dome",
+					"entries": [
+						"Reality appears to shift around the creature, who perceives a sudden transformation in the surrounding terrain into a vast maze of underwater alleys and crumbling ruins. The creature must attempt a DC 37 Will save, and the shadow maze then rolls initiative.",
+						{
+							"type": "successDegree",
+							"entries": {
+								"Critical Success": [
+									"The creature sees through the illusions and can move freely through squares within the shadow maze's effect. It's temporarily immune to the effects of the trap's routine for 1 minute."
+								],
+								"Success": [
+									"The creature understands that what it's experiencing is an illusion, but it isn't immune to the effects of the trap's routine."
+								],
+								"Failure": [
+									"The creature believes it has stepped into a vast maze. To those observing the creature outside of the shadow maze, the creature remains motionless. The creature becomes {@condition slowed||slowed 2} for 1 round, during which time all of its speeds are reduced to 5 feet."
+								],
+								"Critical Failure": [
+									"The creature not only believes it has entered a vast maze, but is overwhelmed with the sensation of being hopelessly lost. The creature is {@condition immobilized} until the end of its next turn."
+								]
+							}
+						}
+					]
+				}
+			],
+			"routine": [
+				"(1 action; {@trait illusion}, {@trait incapacitation}, {@trait mental}) The shadow maze shifts and adjusts its appearance, affecting all creatures currently located within its area. Any creatures in the area at this time must attempt a DC 37 Will save.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": [
+							"The creature sees through the illusions and can act normally."
+						],
+						"Success": [
+							"The creature treats all squares within the trap's area as difficult terrain, and the trap fills the creature's mind with sensations and false memories that it has been wandering these alleys for nearly an hour. The creature takes {@damage 5d6} mental damage from the perceived strain of navigating the alien flooded alleys."
+						],
+						"Failure": [
+							"As success, but the creature believes it has been wandering the alleys for several hours. It becomes {@condition slowed||slowed 2} for 1 round and takes {@damage 10d6} mental damage from the perceived strain."
+						],
+						"Critical Failure": [
+							"The creature believes it has been hopelessly lost in the alleys of the shadow maze for days, and it is incapacitated for 1 round and takes {@damage 20d6} mental damage from the perceived strain."
+						]
+					}
+				}
+			],
+			"reset": [
+				"If disarmed, the trap resets in 1 hour as long as the two crystals in area {@b C5} still function."
+			]
+		},
+		{
+			"name": "Rogue Sphere",
+			"source": "SF2",
+			"page": 25,
+			"level": 15,
+			"traits": [
+				"rare",
+				"complex",
+				"environmental",
+				"magical"
+			],
+			"stealth": {
+				"bonus": 40,
+				"notes": "(master; +35 in bright light)"
+			},
+			"description": [
+				"A roving sphere of distorted magic shimmers and floats through the air."
+			],
+			"disable": {
+				"entries": [
+					"DC 38 {@skill Arcana}, {@skill Nature}, {@skill Occultism}, or {@skill Religion} (master) to cause the magic of the sphere to dissipate harmlessly, or DC 40 {@skill Thievery} to cause the sphere to burst and implode safely, or {@spell dispel magic} (8th level; counteract DC 34)"
+				]
+			},
+			"defenses": {
+				"ac": {
+					"std": 34
+				},
+				"savingThrows": {
+					"fort": {
+						"std": 23
+					},
+					"ref": {
+						"std": 29
+					}
+				},
+				"hardness": {
+					"std": 25
+				},
+				"hp": {
+					"std": 96
+				},
+				"bt": {
+					"std": 48
+				},
+				"immunities": [
+					"critical hits",
+					"object immunities",
+					"precision damage"
+				],
+				"weaknesses": [
+					{
+						"name": "force",
+						"amount": 15
+					}
+				]
+			},
+			"actions": [
+				{
+					"name": "Magic Drift",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"trigger": "A creature within 60 feet casts a spell or uses {@trait magical} effect, or a creature within 60 feet is the target of an active spell that's 5th level or higher, carries a magic item of 10th level or higher, or is the target of an ongoing {@trait magical} effect created by a creature who's 10th level or higher",
+					"entries": [
+						"The sphere flies 30 feet toward the triggering creature. If the sphere would enter a creature's space, it stops moving in that creature's space, then attempts to counter the triggering magic effect (or alternately, the strongest magic effect on the creature), with a counteract modifier of +28. A counteracted magic item becomes a mundane item of its type for 10 minutes. If the target is a creature, or is a creature who's carrying the targeted item, the creature takes {@damage 10d6} force damage from this effect (DC 36 basic Fortitude save). The rogue sphere then rolls initiative."
+					]
+				}
+			],
+			"routine": [
+				"(2 actions) The sphere uses its first action to fly 30 feet toward the closest creature currently under the effects of a spell, or it uses both actions to fly 60 feet toward the closest creature if none are within 30 feet. The rogue sphere attempts to enter the target's space. If a rogue sphere shares a creature's space, it uses an action to Magic Drift the target. If the target has no {@trait magical} effects or carries no magic items, the result of its Fortitude save to resist the force damage caused by Magic Drift is increased by one degree of success."
+			],
+			"reset": [
+				"The sphere ceases moving when no creature remains to trigger Magic Drift. It then dissipates after an hour spent with no targets within 60 feet"
+			]
+		},
+		{
+			"name": "Falling Stars Trap",
+			"source": "SF1",
+			"page": 59,
+			"level": 15,
+			"traits": [
+				"uncommon",
+				"magical",
+				"trap"
+			],
+			"stealth": {
+				"dc": 40,
+				"minProf": "master"
+			},
+			"description": [
+				"Pressure plates in the floor cause crystal-tipped spikes to rain down into the room and explode."
+			],
+			"disable": {
+				"entries": [
+					"DC 40 {@skill Thievery} (master) to disable enough pressure plates so the trap won't trigger"
+				]
+			},
+			"actions": [
+				{
+					"name": "Rain of Stars",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"trigger": "Each time a non-flying creature enters a square in this room, roll a secret DC {@flatDC 6} flat check. On a failure, the trap triggers as the character steps on a pressure plate\u2014the trap automatically triggers if a creature steps on either square just west of the hallway leading to {@b H12}",
+					"entries": [
+						"The trap makes a crystal spike {@action Strike} against all creatures in the room, then each creature in the room takes {@damage 6d10} piercing damage as the spikes explode (DC 36 basic Reflex save)."
+					]
+				}
+			],
+			"attacks": [
+				{
+					"range": "Melee",
+					"name": "crystal spike",
+					"attack": 34,
+					"damage": "{@damage 2d12+26} piercing"
+				}
+			],
+			"reset": [
+				"The trap's supply of spikes magically replenishes, and the trap resets after 1 hour."
+			]
+		},
+		{
+			"name": "Guardian Mural",
+			"source": "SF1",
+			"page": 56,
+			"level": 15,
+			"traits": [
+				"unique",
+				"magical",
+				"trap"
+			],
+			"stealth": {
+				"dc": 40
+			},
+			"description": [
+				"One of the carvings on the mural suddenly animates and clambers out of the painting to become a real creature in the middle of the chamber."
+			],
+			"disable": {
+				"entries": [
+					"DC 35 {@skill Thievery} (to deface the mural in precisely the right way to render it inoperable), or {@spell dispel magic} (7th level; counteract DC 34) to counteract the mural"
+				]
+			},
+			"actions": [
+				{
+					"name": "Summon Mukradi",
+					"activity": {
+						"number": 1,
+						"unit": "reaction"
+					},
+					"trigger": "A creature attempts to open the door to area H7",
+					"entries": [
+						"A living {@creature mukradi} manifests in the 20-foot-square space indicated by the dotted outline on the map. Any other creatures in this area are knocked {@condition prone} and pushed out of this square\u2014those who succeed at a DC 40 Reflex save can choose to be pushed north or south, while those who fail are pushed west, out of the room entirely down a 200-foot fall. These creatures can {@action Grab an Edge||Grab the Edge} with a successful DC 36 Reflex save. The {@creature mukradi} then rolls initiative but vanishes completely after 1 minute."
+					]
+				}
+			],
+			"reset": [
+				"24 hours"
+			]
+		},
+		{
+			"name": "Stage Fire",
+			"source": "SF1",
+			"page": 45,
+			"level": 12,
+			"traits": [
+				"uncommon",
+				"complex",
+				"environmental",
+				"fire"
+			],
+			"stealth": {
+				"bonus": 0,
+				"notes": "(initiative modifier is {@d20 +28})"
+			},
+			"description": [
+				"Flames engulf the opera house's stage."
+			],
+			"disable": {
+				"entries": [
+					"{@skill Survival} DC 27 to extinguish two adjacent squares of fire (with a critical success extinguishing four adjacent squares); any {@trait water} spell (such as from {@spell create water} or {@spell hydraulic push}) cast at the fire extinguishes two squares automatically, or {@dice 2d4} adjacent squares if the caster of the spell achieves a DC 30 result with a spell attack roll; {@spell quench|APG} instantly extinguishes all fire within its 20-foot burst."
+				]
+			},
+			"actions": [
+				{
+					"name": "Erupt in Flame",
+					"entries": [
+						"When this encounter begins, the fire erupts in a ring that encircles the entire stage, as shown by the dotted outline on the map. The stage fire then rolls initiative."
+					]
+				}
+			],
+			"routine": [
+				"On its turn, the stage fire expands inward and outward by 5 feet, filling all adjacent squares with fire. Creatures within these squares take {@damage 4d6} fire damage (DC 30 basic Reflex save), as do any creatures that enter a burning square. This fire damage can be inflicted on a creature only once per turn.",
+				"In addition, a creature that ends its turn in a burning square takes {@damage 8d6} fire damage (DC 30 basic Reflex save); on a failed save, that creature also takes {@damage 1d6} {@condition persistent damage||persistent fire damage}."
+			]
+		},
+		{
 			"name": "Twist of Fate",
 			"source": "CotT",
 			"remaster": true,
@@ -7813,7 +8492,7 @@
 					},
 					"trigger": "The Abyss-warped trees critically hit a creature with a branch {@action Strike}",
 					"entries": [
-						"The Abyss‑warped trees loop their branches around the triggering creature, grabbing it ({@action Escape} DC 21)."
+						"The Abyss-warped trees loop their branches around the triggering creature, grabbing it ({@action Escape} DC 21)."
 					]
 				}
 			],

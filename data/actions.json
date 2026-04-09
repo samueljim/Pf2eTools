@@ -1,6 +1,312 @@
 {
 	"action": [
 		{
+			"source": "RotR0",
+			"remaster": true,
+			"page": 25,
+			"name": "Spread Word of Your Homeland",
+			"traits": [
+				"uncommon",
+				"auditory",
+				"concentrate",
+				"downtime",
+				"linguistic"
+			],
+			"entries": [
+				"As a newcomer to Xin-Eurythnia, you'll find that this isn't unusual, as most of the city's inhabitants come from far- flung parts of the world. As a result, trading stories of homelands has become something of a tradition at social gatherings, or simply as a form of small talk while out drinking, eating, or shopping. You spend the day engaged in such activities, spreading stories about where you come from to the delight of many. Attempt a DC 30 {@skill Diplomacy|PC1} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "So many of those you speak to are amazed by your stories, and many of them gift you potent gifts and trinkets in thanks. You gain 5 {@trait common} level 12 (or lower) {@trait consumable} magic items or alchemy items.",
+						"Success": "No one seems overwhelmingly enthralled by your stories at this time, but they did have fun listening to them."
+					}
+				}
+			]
+		},
+		{
+			"source": "RotR0",
+			"page": 26,
+			"remaster": true,
+			"name": "Revelations from the Time Before",
+			"traits": [
+				"uncommon",
+				"concentrate",
+				"downtime",
+				"manipulate"
+			],
+			"entries": [
+				"Whether it's because you've exhaustively studied the ancient lore of Thassilon, have had friends or family who were adventurers involved in previous campaigns involving the same, or are yourself one of those strangers to this time recently escaped from the time-locked city of Xin-Edasseril, there are things hidden in plain sight in the ancient architecture of Xin-Eurythnia that you understand that others might never even guess at. You spend the day exploring some of the more out-of-the-way corners of the city, focusing on old ruins that haven't yet been restored or moved into. Attempt a DC 30 {@skill Occultism|PC1} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "Your explorations have revealed a cleverly hidden niche in a remote building, within which lies a long-forgotten magic item. You gain one {@trait common} level 12 (or lower) magic held item (other than a staff or wand) of your choice.",
+						"Success": "While you don't discover any strange hidden secrets, the time spent exploring the city was fun."
+					}
+				}
+			]
+		},
+		{
+			"source": "RotR0",
+			"remaster": true,
+			"page": 26,
+			"name": "Feats of Strength and Bravado",
+			"traits": [
+				"uncommon",
+				"concentrate",
+				"downtime",
+				"manipulate"
+			],
+			"entries": [
+				"While the opening ceremony for the unveiling of Sorshen's portal, the Circle of Open Hands, hasn't yet taken place, the overall attitude of the city is one of excited anticipation. Xin-Eurythnia's a relatively new city housed in the bones of an ancient one, and as such its populace's traditions are a mishmash of exported festivals and pastimes from across the world... yet one thing seems the same regardless: the appreciation of heroic feats and demonstrations of physical prowess. Games where participants test their might against contraptions meant to measure strength, good-natured wrestling matches, or sports matches or races where people compete for prizes alone or as part of a team\u2014you spend the day testing your strength in between regaling anyone who listens with stories of your heroic past. Attempt a DC 30 {@skill Athletics|PC1} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "You not only wow the onlookers, but one game you win nets you an impressive prize. You gain one {@trait common} level 12 (or lower) magic weapon of your choice. If you choose a magic weapon with multiple runes that are each lower than level 12, the combined value of the weapon you choose must be equal to or less than 2,000 gp.",
+						"Success": "You come close a few times to winning a game, but even though you never quite came in first place today, you had a lot of fun trying."
+					}
+				}
+			]
+		},
+		{
+			"source": "RotR0",
+			"page": 26,
+			"name": "Admire Artistry",
+			"remaster": true,
+			"traits": [
+				"uncommon",
+				"auditory",
+				"concentrate",
+				"downtime",
+				"linguistic"
+			],
+			"entries": [
+				"In part due to the influence of the church of Nocticula, currently Xin-Eurythnia's most widespread faith, galleries of all types have popped up around the city's Entertainment District. Here, you can explore local artists' paintings, sculptures, and more or browse through larger exhibitions put on by various churches or guilds. There's a friendly air of competition among these artists, and many of them have taken to incorporating religious themes from a wide range of faiths into their work. You spend the day exploring these galleries and chatting with the artists. Attempt a DC 30 {@skill Religion|PC1} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "In admiring the works of art, you met an artist who shares your beliefs, and they were so thankful and touched by your interest in their work that they give you one of their most expensive works of art as a gift. You gain one {@trait common} level 12 (or lower) magic worn item of your choice.",
+						"Success": "You spend the day admiring a wide range of artwork but are unable to offer any particularly inspiring insights to their creators."
+					}
+				}
+			]
+		},
+		{
+			"source": "RotR0",
+			"page": 26,
+			"remaster": true,
+			"name": "A Lively Debate",
+			"traits": [
+				"uncommon",
+				"auditory",
+				"concentrate",
+				"downtime",
+				"linguistic"
+			],
+			"entries": [
+				"While some of Xin-Eurythnia's citizens are artists and creators who fled persecution in their homeland, many others are scholars and spellcasters who see the opportunity to live in one of the continent's oldest cities as a chance to fully immerse themselves in the pursuit of arcane knowledge. They might be practicing wizards, professors of magical theory, or collectors of esoterica, but all these scholars often engage in lively debates in public forums where they present theories for their peers to review, deconstruct, or (as every scholar here seems to hope) be astounded by. While listening to these debates can be entertaining, you can spend the day taking part in them\u2014providing critiques to others in your field or presenting your own theories for others to engage in. Attempt a DC 30 {@skill Arcana|PC1} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "You found yourself caught up in a high- stakes debate, and not only that, emerged as the victor! As a reward, you're given a magic staff or wand. You gain one {@trait common} level 12 (or lower) magic staff or magic wand of your choice.",
+						"Success": "Your theories were welcomed and met with enthusiasm, but in the end you came away from the debate having learned more about areas to improve upon rather than wowing your peers."
+					}
+				}
+			]
+		},
+		{
+			"source": "RotR0",
+			"remaster": true,
+			"page": 27,
+			"name": "Seek Clues for Eventual Vengeance",
+			"traits": [
+				"uncommon",
+				"concentrate",
+				"downtime",
+				"manipulate"
+			],
+			"entries": [
+				"While there's much in Xin-Eurythnia to entertain and delight, your interest in the city is more personal. Despite the city's restoration, there remain parts where this work has yet to be undertaken, particularly in some of the underground regions accessible through caverns lining the valley walls or hidden in abandoned structures' basements. Here, clues about the strengths and weaknesses of the runelords of eras past might still await discovery\u2014even if it wasn't Runelord Karzoug who directly impacted your life, his spies surely kept detailed records on his enemies. With the preservative magic that all Thassilonian sites seem to enjoy, you might just be able to discover something carved on a wall, hidden in a secret vault, or whispered by a long- dead ghost, but you need to know where to look. So many of the underground reaches of this region have been reworked or reshaped by the passage of time (and ancient flow of lava) that you find yourself having to rely upon your knowledge of the natural world in order to seek out clues. You spend the day exploring remote parts of the city, then attempt a DC 30 {@skill Nature|PC1} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "While exploring these old parts of the city, you made an astounding discovery. A section of stone seemed hollow, but it broke apart with a single light blow to reveal the long-dead remains of a skeleton within. The skeleton crumbled to dust at once, leaving behind the armor it once wore. Almost as if fate took a role in its discovery, this armor is just your size! You gain {@trait common} level 12 (or lower) suit of magic armor of your choice. If you choose a suit of magic armor with multiple runes that are each lower than level 12, the combined value of the armor you choose must be equal to or less than 2,000 gp.",
+						"Success": "Your explorations may not have resulted in the discoveries you hoped to find, but the process of doing so gave you a few hours to reflect and relax, at least!"
+					}
+				}
+			]
+		},
+		{
+			"name": "Debate the Harrowing Three",
+			"source": "SF3",
+			"page": 50,
+			"traits": [
+				"auditory",
+				"concentrate",
+				"linguistic",
+				"mental"
+			],
+			"entries": [
+				"You spend several minutes arguing your points with the Harrowing Three to convince them of the error of their beliefs. Select one of the key skills associated with the argument you made and attempt a check with that skill\u2014the required DC depends on the skill used, as indicated in the Arguments against Destiny section below.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "Your argument is particularly well-presented or resonates with the norns. The party gains 2 Argument Points.",
+						"Success": "The norns understand your point. The party gains gain 1 Argument Point.",
+						"Failure": "Your argument is unconvincing.",
+						"Critical Failure": "You manage to undermine your own argument or even argue on behalf of the norns for a moment. The party loses 1 Argument Point."
+					}
+				}
+			]
+		},
+		{
+			"name": "Read the Stars",
+			"source": "SF3",
+			"page": 22,
+			"traits": [
+				"concentrate"
+			],
+			"activity": {
+				"number": 1,
+				"unit": "action"
+			},
+			"frequency": {
+				"number": 1,
+				"unit": "round"
+			},
+			"entries": [
+				"You focus on the night sky to determine where the Eclipse currently is, either by attempting a {@skill Perception} check to focus on the Eclipse's actual location, a Nature check (or with the GM's approval, an appropriate {@skill Lore} check such as {@skill Lore||Astronomy Lore}) to estimate where on Golarion the view might be from, or a {@skill Society} check to recognize a landmark. The DCs of each check depend on the view presented.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "You recognize the location and bring the Eclipse into sharper focus, reducing its Distance Score by 1. You also gain a hint about where the Eclipse might go next, granting you and your allies a +2 circumstance bonus to checks to Read the Stars until the start of your next turn.",
+						"Success": "As critical success, except you gain no bonus.",
+						"Failure": "You're unable to determine the Eclipse's location.",
+						"Critical Failure": "You misunderstand a crucial detail, and the confusion prevents you from attempting to Read the Stars on your next turn."
+					}
+				}
+			]
+		},
+		{
+			"name": "Enjoy Desert Drink",
+			"page": 17,
+			"source": "SF3",
+			"traits": [
+				"manipulate"
+			],
+			"entries": [
+				"You spend a few rounds to drink an entire cup of desert drink. While it tastes wonderful, desert drink is particularly strong and requires a DC 38 Fortitude save. Any effects that you receive from Enjoying a Desert Drink can't be reduced or mitigated and remain active until you complete the Test of Destiny. Desert drink is a {@trait poison}, which means that abilities and effects that interact with {@trait poison} are relevant. You can Enjoy Desert Drink even if you are {@condition sickened}. Note that since the {@creatureTemplate harrowkin|SF3} believe they're living creatures as far as the Test of Destiny and the desert drink are concerned, they are not immune to the {@condition drained} or {@condition sickened} conditions caused by this activity.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "Somehow, the desert drink makes you feel great. You gain 10 temporary Hit Points and reduce your {@condition drained} and {@condition sickened} conditions by 1.",
+						"Success": "You're able to hold your drink, and suffer no effect.",
+						"Failure": "That's a rough drink! You become {@condition drained||drained 1} and {@condition sickened||sickened 1}, or increase your values for both of those conditions by 1.",
+						"Critical Failure": "The desert drink burns, and not in a good way! You become {@condition drained||drained 2} and {@condition sickened||sickened 2}, or increase your values for both of those conditions by 2."
+					}
+				}
+			]
+		},
+		{
+			"name": "Enter the Harrow Court",
+			"page": 69,
+			"source": "SF1",
+			"traits": [
+				"concentrate",
+				"conjuration",
+				"exploration",
+				"manipulate",
+				"occult",
+				"teleportation"
+			],
+			"entries": [
+				"You concentrate on a card from the {@i Deck of Destiny} that you have invested, focusing on it as if you were looking through a window rather than at a piece of artwork. After 1 minute, a stationary portal appears in the air in front of you, its edges resembling the quick riffling of a thick deck of cards. You and any other creatures you designate can pass through this portal to enter {@plane the Harrow Court|SF1}, arriving in a fortress at the center of the demiplane known as the Harrowheart. (As you continue to epitomize more cards within {@plane the Harrow Court|SF1}, you unlock new areas into which you can potentially arrive as well\u2014but in this adventure, that ability won't yet be granted.) Once created, the portal persists for up to 1 minute or until you take an action with the envision trait to close the portal.",
+				"A character in {@plane the Harrow Court|SF1} can use this activity to open a portal out of the demiplane, but this portal always leads to the same point in the multiverse they were at when they previously entered {@plane the Harrow Court|SF1} (unless certain cards have been epitomized to allow more options)."
+			]
+		},
+		{
+			"name": "Activate Karzoug's Glare",
+			"source": "SF1",
+			"page": 54,
+			"activity": {
+				"number": 1,
+				"unit": "action"
+			},
+			"entries": [
+				"You touch the crystal within its siccatite frame and take 1 fire damage from the contact with the searing hot surface. You can then discharge the energy within the crystal (consuming the crystal in the process) to fire a beam of fiery energy from the tip of that statue's polearm, targeting any location aboveground on the Storval Stairs or within 400 feet of its bottommost step. An explosion of fire fills a 20-foot-burst at that location; all creatures in the area must attempt a DC 30 Reflex save. The transparency of the interior of the room ends at the end of your turn.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "The creature is unaffected.",
+						"Success": "The creature takes {@damage 6d6} fire damage.",
+						"Failure": "The creature takes {@damage 12d6} fire damage and is knocked {@condition prone}.",
+						"Critical Failure": "The creature takes {@damage 20d6} fire damage, takes {@damage 4d6} {@condition persistent damage||persistent fire damage}, and is knocked {@condition prone}."
+					}
+				}
+			]
+		},
+		{
+			"name": "Swing to the Stage",
+			"source": "SF1",
+			"page": 44,
+			"activity": {
+				"number": 3,
+				"unit": "action"
+			},
+			"entries": [
+				"You find one of the hanging ropes from the opera house's rigging and swing onto the burning stage. Attempt a DC 30 {@skill Acrobatics} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "You swing the distance with style and land anywhere on stage that you choose.",
+						"Success": "You swing down to the stage, landing anywhere adjacent to the fire that you choose, but take {@damage 4d6} fire damage in the process (DC 30 basic Reflex save).",
+						"Failure": "You swing down to the stage, landing in the square of fire that's closest to the point you swung from. You take {@damage 6d6} fire damage (DC 30 basic Reflex save).",
+						"Critical Failure": "Your grip on the rope slips, and you fall into the orchestra pit, taking {@damage 4d6} bludgeoning damage and {@damage 6d6} fire damage (DC 30 basic Reflex save). A DC 20 {@skill Athletics} check allows you to clamber up from the orchestra pit onto the stage."
+					}
+				}
+			]
+		},
+		{
+			"name": "Aid Rice Ritual",
+			"source": "SF1",
+			"page": 37,
+			"traits": [
+				"concentrate",
+				"exploration"
+			],
+			"entries": [
+				"A character spends the last few hours before sundown aiding the Scaleseeds in preparing the ring of rice plants by attempting a DC 23 {@skill Lore||Farming Lore} or {@skill Survival} check, a DC 28 {@skill Nature} check, or a DC 30 {@skill Religion} check.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "The PCs gain 2 Rice Ritual Points.",
+						"Success": "The PCs gain 1 Rice Ritual Point.",
+						"Critical Failure": "The PCs lose 1 Rice Ritual Point."
+					}
+				}
+			]
+		},
+		{
+			"source": "SF1",
+			"page": 17,
+			"name": "Run the Obstacle Course",
+			"traits": [
+				"exploration",
+				"move"
+			],
+			"entries": [
+				"You attempt to navigate the obstacle course Clemeth set up in the Reclaimed Paradise Scrapyard. Attempt a DC 26 {@skill Acrobatics} check, a DC 26 {@skill Athletics} check, then a DC 28 check using your choice of {@skill Acrobatics}, {@skill Athletics}, or {@skill Perception}. Regardless of the check, each is a 1-minute activity. You successfully navigate the obstacle course once you earn 3 Obstacle Course Points without taking a break between checks. If you attempt this activity more than 4 times in a row, you become {@condition fatigued}.",
+				{
+					"type": "successDegree",
+					"entries": {
+						"Critical Success": "You earn 2 Obstacle Course Points and gain a +2 circumstance bonus to your next check to Run the Obstacle Course.",
+						"Success": "You push forward on the course and gain 1 Obstacle Course Point.",
+						"Failure": "You earn no Obstacle Course Points and must attempt a DC 28 Reflex save. If you fail, you wrench a muscle or otherwise hurt yourself and become {@condition enfeebled||enfeebled 1} for 1 hour.",
+						"Critical Failure": "You lose 1 Obstacle Course Point and twist an ankle or otherwise seriously hurt yourself, becoming {@condition enfeebled||enfeebled 2} (a successful DC 28 Reflex save reduces this to {@condition enfeebled||enfeebled 1})."
+					}
+				}
+			]
+		},
+		{
 			"name": "Call Companion",
 			"page": 160,
 			"source": "APG",
@@ -3536,7 +3842,7 @@
 						{
 							"type": "list",
 							"items": [
-								"First, {b{@action Hide|PC1}} behind something (either by taking advantage of cover or having the {@condition concealed|PC1} condition due to fog, a spell, or a similar effect). A successful {@skill Stealth|PC1} check makes you {@condition hidden|PC1}, though the creatures still know roughly where you are.",
+								"First, {@action Hide|PC1} behind something (either by taking advantage of cover or having the {@condition concealed|PC1} condition due to fog, a spell, or a similar effect). A successful {@skill Stealth|PC1} check makes you {@condition hidden|PC1}, though the creatures still know roughly where you are.",
 								"Second, now that you're {@condition hidden|PC1}, you can {@action Sneak|PC1}. That means you can move at half your Speed and attempt another {@skill Stealth|PC1} check. If it's successful, you're now {@condition undetected|PC1}. That means the creatures don't know which square you're in anymore."
 							]
 						},
@@ -3621,7 +3927,7 @@
 						{
 							"type": "list",
 							"items": [
-								"First, {b{@action Hide|PC1}} behind something (either by taking advantage of cover or having the {@condition concealed|PC1} condition due to fog, a spell, or a similar effect). A successful {@skill Stealth|PC1} check makes you {@condition hidden|PC1}, though the creatures still know roughly where you are.",
+								"First, {@action Hide|PC1} behind something (either by taking advantage of cover or having the {@condition concealed|PC1} condition due to fog, a spell, or a similar effect). A successful {@skill Stealth|PC1} check makes you {@condition hidden|PC1}, though the creatures still know roughly where you are.",
 								"Second, now that you're {@condition hidden|PC1}, you can {@action Sneak|PC1}. That means you can move at half your Speed and attempt another {@skill Stealth|PC1} check. If it's successful, you're now {@condition undetected|PC1}. That means the creatures don't know which square you're in anymore."
 							]
 						},

@@ -85,5 +85,8 @@
 	"PC1": "items-pc1.json",
 	"LORA": "items-lora.json",
 	"CotT": "items-cott.json",
-	"LOSK": "items-losk.json"
+	"LOSK": "items-losk.json",
+	"SF1": "items-sf1.json",
+	"SF2": "items-sf2.json",
+	"SF3": "items-sf3.json"
 }

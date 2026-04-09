@@ -963,6 +963,7 @@ function Renderer () {
 			if (entry.DC != null) textStack[0] += `DC ${renderer.render(entry.DC)}`
 			if (entry.DC != null && entry.savingThrow != null) textStack[0] += " "
 			if (entry.savingThrow != null) textStack[0] += `${renderer.render(entry.savingThrow)}`
+			if (entry.savingThrowNote) textStack[0] += ` (${entry.savingThrowNote})`;
 			textStack[0] += "; "
 		}
 		if (entry.onset != null) textStack[0] += `<strong>Onset</strong> ${renderer.render(entry.onset)}; `;
@@ -2410,9 +2411,9 @@ function Renderer () {
 						this._recursiveRender(fauxEntry, textStack, meta);
 						break;
 					case "@familiarAbility":
-						fauxEntry.href.path = UrlUtil.PG_COMPANIONS_FAMILIARS;
+						fauxEntry.href.path = UrlUtil.PG_FAMILIAR_ABILITIES;
 						fauxEntry.href.hover = {
-							page: UrlUtil.PG_COMPANIONS_FAMILIARS,
+							page: UrlUtil.PG_FAMILIAR_ABILITIES,
 							source,
 						};
 						this._recursiveRender(fauxEntry, textStack, meta);
@@ -4174,8 +4175,7 @@ Renderer.familiar = {
 	},
 
 	getRenderedFamiliarAbility (it, opts) {
-		// TODO:
-		return `${Renderer.utils.getNameDiv(it, { type: `${it.type} Ability` })}
+		return `${Renderer.utils.getNameDiv(it, { type: `${it.type} Ability`, ...opts })}
 			${Renderer.utils.getDividerDiv()}
 			${Renderer.utils.getTraitsDiv(it.traits)}
 			${Renderer.generic.getRenderedEntries(it)}
@@ -4378,8 +4378,8 @@ Renderer.creature = {
 			});
 			let notes = cr.skills["notes"] || [];
 
-			renderStack.push(skills.sort().join("<span>, </span>"))
-			renderStack.push(notes.length !== 0 ? `<span>, </span>${notes.join("<span>, </span>")}` : "")
+			renderStack.push(skills.sort().join("</span>, <span>"))
+			renderStack.push(notes.length !== 0 ? `</span>; <span>${notes.join("</span>, <span>")}` : "")
 			renderStack.push(`</p>`)
 
 			return renderStack.join("")
@@ -4526,8 +4526,8 @@ Renderer.creature = {
 				if (sc.DC != null) meta.push(`DC ${sc.DC}`);
 				if (sc.attack != null) meta.push(`attack {@hit ${sc.attack}||Spell attack}`);
 				if (sc.fp != null) meta.push(`${sc.fp} Focus Points`);
+				if (sc.note) meta.push(renderer.render(sc.note));
 				renderStack.push(`<p class="pf2-stat pf2-stat__section"><strong>${spellcastingName}&nbsp;</strong>`)
-				if (sc.note != null) renderStack.push(`${renderer.render(sc.note)} `)
 				renderStack.push(renderer.render(meta.join(", ")))
 				Object.keys(sc.entry).sort(SortUtil.sortSpellLvlCreature).forEach((lvl) => {
 					if (lvl !== "constant") {
@@ -7532,7 +7532,9 @@ Renderer.hover = {
 			case UrlUtil.PG_FEATS:
 				return Renderer.hover._pCacheAndGet_pLoadWithIndex(page, source, hash, opts, "data/feats/", "feat");
 			case UrlUtil.PG_COMPANIONS_FAMILIARS:
-				return Renderer.hover._pCacheAndGet_pLoadSimple(page, source, hash, opts, "companionsfamiliars.json", ["companion", "companionAbility", "familiar", "familiarAbility", "eidolon"]);
+				return Renderer.hover._pCacheAndGet_pLoadSimple(page, source, hash, opts, "companionsfamiliars.json", ["companion", "companionAbility", "familiar", "eidolon"]);
+			case UrlUtil.PG_FAMILIAR_ABILITIES:
+				return Renderer.hover._pCacheAndGet_pLoadSimple(page, source, hash, opts, "companionsfamiliars.json", ["familiarAbility"]);
 			case UrlUtil.PG_ANCESTRIES:
 				return Renderer.hover._pCacheAndGet_pLoadAncestries(page, source, hash, opts);
 			case UrlUtil.PG_DEITIES:
@@ -8202,6 +8204,8 @@ Renderer.hover = {
 				return Renderer.feat.getRenderedString;
 			case UrlUtil.PG_COMPANIONS_FAMILIARS:
 				return Renderer.companionfamiliar.getRenderedString;
+			case UrlUtil.PG_FAMILIAR_ABILITIES:
+				return Renderer.familiar.getRenderedFamiliarAbility;
 			case UrlUtil.PG_ANCESTRIES:
 				// FIXME: heritage rendering
 				return Renderer.ancestry.getRenderedString;

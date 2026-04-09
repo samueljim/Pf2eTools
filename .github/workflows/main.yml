@@ -36,8 +36,13 @@ jobs:
               run: bash ./.github/generate-release-notes.sh ${{ env.RELEASE_VERSION }} | tee RELEASE_NOTES.md
 
             - name: Archive Release
+              continue-on-error: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   zip -r Pf2eTools-${{ env.RELEASE_VERSION }}.zip . -x '*.git*' '*node_modules*' '*.github*' '*.editorconfig*' '*CNAME*' 'RELEASE_NOTES.md'
+                  hub release create -a Pf2eTools-${{ env.RELEASE_VERSION }}.zip -F RELEASE_NOTES.md ${{ env.RELEASE_VERSION }}
+                  rm Pf2eTools-${{ env.RELEASE_VERSION }}.zip
 
             - name: Set Deployed Flag
               run: |
@@ -80,31 +85,12 @@ jobs:
                   branch: prod
                   folder: .
 
-            - name: Upload Release
-              continue-on-error: true
-              # Add the files one-by-one in an effort to avoid timeouts
-              run: |
-                  hub release create -a Pf2eTools-${{ env.RELEASE_VERSION }}.zip -F RELEASE_NOTES.md ${{ env.RELEASE_VERSION }}
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
             # region See: https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio
             - name: Build Image
               run: |
                   docker build -t $IMAGE_NAME .
             - name: Log In to Registry
               run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-            - name: Update Cloudflare Branch
-              run: |
-                git config --global user.name '${{ github.actor }}'
-                git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-                git add --all
-                git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
-                git fetch origin "main"
-                git switch -c "main" "origin/main"
-                git commit -m "${{ env.RELEASE_VERSION }}"
-                git push -f
 
             - name: Push Image
               run: |
